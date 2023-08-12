@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Articles{% endblock title %}
+{% block content %}
+<!-- {% for i in '0123456789'|make_list %}{% endfor %} -->
+<div class="flex flex-col">
+    <div class="text-center dark:bg-gray-800 dark:text-white font-extrabold text-2xl ">Latest</div>
+    <div class="h-auto min-h-screen text-center dark:bg-gray-800">
+        {% for article in article_list %}
+        <div class="CARDS mt-4 mx-2 inline-block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a href="{{article.get_absolute_url}}" class="">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text_overflow_title">{{article.title}}</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400 text-justify text_overflow_body">{{ article.body }}</p>
+                <p class="text-right mt-2 text-gray-700 dark:text-gray-400">by {{article.author}}</p>
+            </a>
+            <div class="flex flex-row-reverse dark:border-gray-700 border-t border-gray-200 mt-3">
+                <a href="{%url 'article_delete' article.slug%}" class="w-1/2 text-gray-900 dark:text-white">Delete</a>
+                <a href="{%url 'article_update' article.slug%}" class="w-1/2 text-gray-900 dark:text-white">Edit</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'article_create' %}" class="absolute bottom-6 left-6 p-3 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full cursor-pointer">
+        <img src="{% static 'svg/plus.svg' %}" class="w-7 h-7"/>
+    </a>
+</div>
+<style>
+    .text_overflow_body{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 5; /* number of lines to show */
+                line-clamp: 5; 
+        -webkit-box-orient: vertical;
+    }
+    .text_overflow_title{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+                line-clamp: 2; 
+        -webkit-box-orient: vertical;
+    }
+</style>
+{% endblock content %}

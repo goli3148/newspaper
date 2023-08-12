@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "dev": "tailwindcss -i django_project\\static\\tailwindcss_input\\input.css -o django_project\\static\\css\\output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
